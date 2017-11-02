@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.k-kagurazaka:taiyaki:1.0.0'
+    compile 'com.github.k-kagurazaka:taiyaki:1.1.0'
 }
 ```
 
