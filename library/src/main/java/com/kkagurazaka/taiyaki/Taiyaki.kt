@@ -17,6 +17,10 @@ interface CanHandle<in T : DialogRequest> : HasTaiyaki<T> {
 
     override val taiyaki: Taiyaki<T>
 
+    fun request(request: T) {
+        taiyaki.request(request)
+    }
+
     override fun onDialogRequest(request: T)
 }
 
