@@ -28,10 +28,10 @@ data class DialogWithParamRequest(val param: String) : MainDialogRequest()
 object DialogWithoutParamRequest : MainDialogRequest()
 ```
 
-Next, implement `HasTaiyaki` interafce to your activity.
+Next, implement `CanHandle<T: DialogRequest>` interafce to your activity.
 
 ```kotlin
-class MainActivity : AppCompatActivity(), HasTaiyaki<MainDialogRequest> {
+class MainActivity : AppCompatActivity(), CanHandle<MainDialogRequest> {
     override val taiyaki = Taiyaki(this)
 
     // Handling your DialogRequest
@@ -60,7 +60,7 @@ You are done! Now, you can send requests to show `DialogFragment`.
 ```kotlin
 // in Activity
 fun showDialogWithoutParam() {
-    taiyaki.request(DialogWithoutParamRequest)
+    request(DialogWithoutParamRequest)
 }
 ```
 
