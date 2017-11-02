@@ -1,12 +1,12 @@
 package com.kkagurazaka.taiyaki.internal
 
 import com.kkagurazaka.taiyaki.DialogRequest
-import com.kkagurazaka.taiyaki.HasTaiyaki
+import com.kkagurazaka.taiyaki.CanHandle
 import com.kkagurazaka.taiyaki.Taiyaki
 import java.util.*
 
 internal class TaiyakiImpl<in T : DialogRequest>(
-        private val holder: HasTaiyaki<T>,
+        private val holder: CanHandle<T>,
         private val showLatestOnly: Boolean
 ) : Taiyaki<T> {
 

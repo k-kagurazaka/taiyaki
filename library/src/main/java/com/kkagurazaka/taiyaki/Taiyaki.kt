@@ -5,11 +5,19 @@ import android.app.Application
 import android.os.Bundle
 import com.kkagurazaka.taiyaki.internal.TaiyakiImpl
 
+@Deprecated(message = "", replaceWith = ReplaceWith("CanHandle"))
 interface HasTaiyaki<in T : DialogRequest> {
 
     val taiyaki: Taiyaki<T>
 
     fun onDialogRequest(request: T)
+}
+
+interface CanHandle<in T : DialogRequest> : HasTaiyaki<T> {
+
+    override val taiyaki: Taiyaki<T>
+
+    override fun onDialogRequest(request: T)
 }
 
 interface Taiyaki<in T : DialogRequest> {
@@ -32,13 +40,13 @@ interface Taiyaki<in T : DialogRequest> {
                     }
 
                     override fun onActivityPaused(activity: Activity?) {
-                        if (activity is HasTaiyaki<*>) {
+                        if (activity is CanHandle<*>) {
                             activity.taiyaki.onActivityPaused()
                         }
                     }
 
                     override fun onActivityResumed(activity: Activity?) {
-                        if (activity is HasTaiyaki<*>) {
+                        if (activity is CanHandle<*>) {
                             activity.taiyaki.onActivityResumed()
                         }
                     }
@@ -55,5 +63,5 @@ interface Taiyaki<in T : DialogRequest> {
     }
 }
 
-fun <T : DialogRequest> Taiyaki(holder: HasTaiyaki<T>, showLatestOnly: Boolean = true): Taiyaki<T> =
+fun <T : DialogRequest> Taiyaki(holder: CanHandle<T>, showLatestOnly: Boolean = true): Taiyaki<T> =
         TaiyakiImpl(holder, showLatestOnly)
