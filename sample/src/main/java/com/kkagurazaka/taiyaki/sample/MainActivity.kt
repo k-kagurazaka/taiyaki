@@ -3,12 +3,12 @@ package com.kkagurazaka.taiyaki.sample
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.kkagurazaka.taiyaki.HasTaiyaki
+import com.kkagurazaka.taiyaki.CanHandle
 import com.kkagurazaka.taiyaki.Taiyaki
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.concurrent.thread
 
-class MainActivity : AppCompatActivity(), HasTaiyaki<MainDialogRequest> {
+class MainActivity : AppCompatActivity(), CanHandle<MainDialogRequest> {
 
     override val taiyaki = Taiyaki(this)
 
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(), HasTaiyaki<MainDialogRequest> {
                 Thread.sleep(3000)
 
                 // showDialog(DialogWithParamRequest("FooBar")) // <- IllegalStateException!
-                taiyaki.request(DialogWithParamRequest("FooBar"))
+                request(DialogWithParamRequest("FooBar"))
             }
         }
     }
